@@ -18,13 +18,16 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks', function () {
-    return view('tasks.index');
-});
+	$tasks = Task::all();
+    return view('tasks.index', [
+		'tasks' => $tasks,
+    ]);
+})->name('tasks.index');
 
 Route::post('/tasks', function (Request $request) {
 	$validator = Validator::make($request->all(), [
 		'name' => 'required|max:5'//TODO 255
-	])->name('tasks.index');
+	]);
 	if($validator->fails()){
 		return redirect(route('tasks.index'))
 			->withInput()
@@ -35,3 +38,8 @@ Route::post('/tasks', function (Request $request) {
 	$task->save();
 	return redirect(route('tasks.index'));
 })->name('tasks.store');
+
+Route::delete('/tasks/{task}', function (Task $task){
+	$task->delete();
+	return redirect(route('tasks.index'));
+})->name('tasks.destroy');

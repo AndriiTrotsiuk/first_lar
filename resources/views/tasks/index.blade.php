@@ -10,5 +10,28 @@
         </label>
         <input type="submit">
     </form>
-{{--    TODO--}}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($tasks as $task)
+                <tr>
+                    <td>{{ $task->id }}</td>
+                    <td>{{ $task->name }}</td>
+                    <td>
+                        <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{method_field('DELETE')}}
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
