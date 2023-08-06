@@ -29,6 +29,9 @@
                             {{method_field('DELETE')}}
                             <button>Delete</button>
                         </form>
+                        <form action="{{ route('tasks.edit', $task) }}" method="get">
+                            <button>Edit</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
