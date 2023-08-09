@@ -5,12 +5,12 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
+| Here is where you can register all the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
 */
-use \Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Task;
 
 Route::get('/', function ()
@@ -48,14 +48,14 @@ Route::delete('/tasks/{task}', function (Task $task)
 	return redirect(route('tasks.index'));
 })->name('tasks.destroy');
 
-Route::get('/tasks/edit/{task}', function (Task $task)
+Route::get('/tasks/{task}/edit', function (Task $task)
 {
 	return view('tasks.edit', [
 		'task' => $task
 	]);
 })->name('tasks.edit');
 
-Route::patch('tasks/update/{task}', function (Request $request, Task $task)
+Route::patch('tasks/{task}/update', function (Request $request, Task $task)
 {
 	$validator = Validator::make($request->all(), [
 		'name' => 'required|max:5'
