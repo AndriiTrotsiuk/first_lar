@@ -55,7 +55,7 @@ Route::get('/tasks/{task}/edit', function (Task $task)
 	]);
 })->name('tasks.edit');
 
-Route::patch('tasks/{task}/update', function (Request $request, Task $task)
+Route::patch('tasks/{task}', function (Request $request, Task $task)
 {
 	$validator = Validator::make($request->all(), [
 		'name' => 'required|max:5'
